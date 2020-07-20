@@ -59,10 +59,8 @@ namespace GarageManagement.Logic
 
         public static List<Vehicle> ConvertBsonListToVehicleList(List<BsonDocument> i_BsonVehicles)
         {
-            StringBuilder vehicleTypeInDocumnet = new StringBuilder();
-            string[] vehicleTypes = Enum.GetNames(typeof(VehicleCreator.eVehiclesTypes));
             List<Vehicle> vehicles = new List<Vehicle>();
-            Vehicle convertedVehicle = null;
+            Vehicle convertedVehicle;
             foreach (BsonDocument bsonVehicle in i_BsonVehicles)
             {
                 convertedVehicle = ConvertBsonDocumentToVehicle(bsonVehicle);

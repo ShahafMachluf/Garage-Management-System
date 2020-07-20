@@ -85,7 +85,7 @@ namespace GarageManagement.Logic
 
                 if (!Enum.IsDefined(typeof(eMotorcycleLicense), parsedValue))
                 {
-                    throw new ValueOutOfRangeException(1, k_NumberOfLicenseType, "ERROR. License type should be choosen from 1 - " + k_NumberOfLicenseType);
+                    throw new ArgumentException("ERROR. Select valid license type.");
                 }
 
                 Enum.TryParse(value, out m_LicenseType);

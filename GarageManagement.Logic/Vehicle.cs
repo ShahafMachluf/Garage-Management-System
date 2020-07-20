@@ -9,7 +9,6 @@ namespace GarageManagement.Logic
 {
     public abstract class Vehicle
     {
-        private const int k_NumberOfRequiredParametersToSet = 3;
         protected string r_LicensePlateNumber;
         protected string m_ModelName;
         protected float m_PercentageOfEnergy;

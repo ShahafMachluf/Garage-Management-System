@@ -47,7 +47,7 @@ namespace GarageManagement.Logic
 
             if(IsVehicleExist(i_LicensePlateNumber))
             {
-                throw new ArgumentException("ERROR. The car with license plate number" + i_LicensePlateNumber + "is already exist");
+                throw new ArgumentException("ERROR. The vehicle with license plate number" + i_LicensePlateNumber + "is already exist");
             }
 
             newVehicle = VehicleCreator.CreateVehicle(i_LicensePlateNumber, i_VehicelType);
@@ -94,7 +94,7 @@ namespace GarageManagement.Logic
         public bool IsVehicleExist(string i_LicensePlateNumber)
         {
             Vehicle vehicleToLookFor;
-            bool isVehicleExist = false;
+            bool isVehicleExist;
 
             if(r_ConnectedToMongoDB)
             {

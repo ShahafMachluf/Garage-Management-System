@@ -11,7 +11,6 @@ namespace GarageManagement.Logic
         private const Fuel.eFuelType k_CarFuelType = Fuel.eFuelType.Octan96;
         private const float k_MaximumBatteryTime = 2.1f;
         private const float k_MaximumAmountOfFuel = 60;
-        private const int k_NumberOfCarColors = 4;
         private const int k_MaximumNumberOfCarDoors = 5;
         private const int k_NumberOfCarWheels = 4;
         private const float k_MaximumWheelAirPressure = 32;
@@ -69,7 +68,7 @@ namespace GarageManagement.Logic
 
                 if (!Enum.IsDefined(typeof(eCarColor), parsedValue))
                 {
-                    throw new ValueOutOfRangeException(1, k_NumberOfCarColors, "ERROR. car color selection should be between 1 - " + k_NumberOfCarColors);
+                    throw new ArgumentException("ERROR. Select a valid car color");
                 }
 
                 Enum.TryParse<eCarColor>(value, out m_Color);
