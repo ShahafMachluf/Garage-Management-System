@@ -152,7 +152,7 @@ namespace GarageManagement.UI
             catch (Exception)
             {
                 isConnected = false;
-                MessageBox.Show("There was an error connection to MongoDB\r\nPlease check the server address, username and password.", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("There was an error connection to MongoDB\r\nPlease check the server address, username and password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             VehicleCreator.RegisterVehicles();

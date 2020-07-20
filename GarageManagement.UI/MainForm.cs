@@ -16,26 +16,24 @@ namespace GarageManagement.UI
     public partial class MainForm : Form
     {
         private readonly GarageManager r_GarageManager;
-        private readonly IMongoCollection<BsonDocument> r_Collection;
 
         public MainForm(bool i_SaveToDataBase, IMongoCollection<BsonDocument> i_DBCollection)
         {
             r_GarageManager = new GarageManager(i_SaveToDataBase, i_DBCollection);
-            r_Collection = i_DBCollection;
             InitializeComponent();
             if (i_SaveToDataBase)
             {
-                selectedEnvironmentLabel.Text = selectedEnvironmentLabel.Text + "MongoDB";
+                selectedEnvironmentLabel.Text += "MongoDB";
             }
             else
             {
-                selectedEnvironmentLabel.Text = selectedEnvironmentLabel.Text + "Local";
+                selectedEnvironmentLabel.Text += "Local";
             }
         }
 
         private void AddNewVehicle_Click(object sender, EventArgs e)
         {
-            AddVehicleForm newVehicleForm = new AddVehicleForm(r_GarageManager, r_Collection);
+            AddVehicleForm newVehicleForm = new AddVehicleForm(r_GarageManager);
             newVehicleForm.ShowDialog();
         }
 
@@ -83,7 +81,14 @@ namespace GarageManagement.UI
 
         private void AboutMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Garage managment system. \r\nCreated by Shahaf Machluf.", "About", MessageBoxButtons.OK);
+            MessageBox.Show(
+                "Garage Managment System.\r\nCreated by Shahaf Machluf.\r\nClick 'Help' to view GitHub repository.",
+                "About", 
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1,
+                0,
+                "https://github.com/ShahafMachluf/Garage-Management-System");
         }
     }
 }

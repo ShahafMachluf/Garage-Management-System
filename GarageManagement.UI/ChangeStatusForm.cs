@@ -42,7 +42,7 @@ namespace GarageManagement.UI
                 }
                 catch (ArgumentException exp)
                 {
-                    MessageBox.Show(exp.Message, "ERROR", MessageBoxButtons.OK);
+                    MessageBox.Show(exp.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

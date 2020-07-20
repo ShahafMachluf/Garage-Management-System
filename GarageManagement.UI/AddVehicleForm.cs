@@ -17,13 +17,11 @@ namespace GarageManagement.UI
     public partial class AddVehicleForm : Form
     {
         private readonly GarageManager r_GarageManagerReference;
-        private readonly IMongoCollection<BsonDocument> r_Collection;
         private bool m_VehicleDetailesFilled;
 
-        public AddVehicleForm(GarageManager i_GarageManagerReference, IMongoCollection<BsonDocument> i_DBCollection)
+        public AddVehicleForm(GarageManager i_GarageManagerReference)
         {
             m_VehicleDetailesFilled = false;
-            r_Collection = i_DBCollection;
             r_GarageManagerReference = i_GarageManagerReference;
             InitializeComponent();
             foreach (string vehicleType in VehicleCreator.GetListOfVehicleTypes())
@@ -36,7 +34,7 @@ namespace GarageManagement.UI
         {
             if (VehicleTypeComboBox.SelectedItem == null)
             {
-                MessageBox.Show("Select vehicle type", "ERROR", MessageBoxButtons.OK);
+                MessageBox.Show("Select vehicle type", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -48,7 +46,7 @@ namespace GarageManagement.UI
                     Enum.TryParse<VehicleCreator.eVehiclesTypes>(selectedType, out vehicleType);
                     Vehicle newVehicle = r_GarageManagerReference.CreateVehicle(LicensePlateNumberText.Text, vehicleType);
                     AdditionalInformationForm informationForm = new AdditionalInformationForm(newVehicle);
-                    informationForm.vehicleDetailesFilled += InformationForm_vehicleDetailesFilled;
+                    informationForm.VehicleDetailesFilled += InformationForm_vehicleDetailesFilled;
                     informationForm.ShowDialog();
                     if (m_VehicleDetailesFilled)
                     {
@@ -65,7 +63,7 @@ namespace GarageManagement.UI
                 }
                 catch (ArgumentException exp)
                 {
-                    MessageBox.Show(exp.Message, "ERROR", MessageBoxButtons.OK);
+                    MessageBox.Show(exp.Message, "ERROR", MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
             }
         }

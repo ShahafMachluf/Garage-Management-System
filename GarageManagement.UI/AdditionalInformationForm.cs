@@ -9,20 +9,20 @@ namespace GarageManagement.UI
 {
     public partial class AdditionalInformationForm : Form
     {
-        private Vehicle m_CurrentVehicleReference;
+        private readonly Vehicle r_CurrentVehicleReference;
 
-        public event Action vehicleDetailesFilled;
+        public event Action VehicleDetailesFilled;
 
         public AdditionalInformationForm(Vehicle i_NewVehicle)
         {
-            m_CurrentVehicleReference = i_NewVehicle;
+            r_CurrentVehicleReference = i_NewVehicle;
             InitializeComponent();
-            initiateAdditionalInformationComponents(m_CurrentVehicleReference);
+            initiateAdditionalInformationComponents(r_CurrentVehicleReference);
         }
 
         private void initiateAdditionalInformationComponents(Vehicle i_NewVehicle)
         {
-            Label parameterLabel = null;
+            Label parameterLabel;
             TextBox parameterTextBox;
             int lastParameterBottom = MessageLabel.Bottom;
             int tabIndex = 0;
@@ -130,6 +130,7 @@ namespace GarageManagement.UI
         private void ButtonOK_Click(object sender, EventArgs e)
         {
             int parameterIndex = 1;
+            bool selectedRadioButton = false;
             List<string> vehicleInformation = new List<string>();
 
             foreach (Control formControl in Controls)
@@ -150,7 +151,13 @@ namespace GarageManagement.UI
                         if (formRadioButton != null && formRadioButton.Checked)
                         {
                             vehicleInformation.Add(formRadioButton.Name);
+                            selectedRadioButton = true;
                         }
+                    }
+
+                    if(!selectedRadioButton)
+                    {
+                        vehicleInformation.Add("-1");
                     }
                 }
             }
@@ -159,13 +166,13 @@ namespace GarageManagement.UI
             {
                 foreach (string vehicleParameter in vehicleInformation)
                 {
-                    m_CurrentVehicleReference.SetVehicleRequiredParameters(vehicleParameter, parameterIndex);
+                    r_CurrentVehicleReference.SetVehicleRequiredParameters(vehicleParameter, parameterIndex);
                     parameterIndex++;
                 }
 
-                if (vehicleDetailesFilled != null)
+                if (VehicleDetailesFilled != null)
                 {
-                    vehicleDetailesFilled.Invoke();
+                    VehicleDetailesFilled.Invoke();
                 }
 
                 Close();
@@ -173,7 +180,6 @@ namespace GarageManagement.UI
             catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
-                parameterIndex = 1;
             }
         }
     }
