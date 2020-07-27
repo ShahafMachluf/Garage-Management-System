@@ -90,5 +90,10 @@ namespace GarageManagement.UI
                 0,
                 "https://github.com/ShahafMachluf/Garage-Management-System");
         }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
